@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Book Catalog</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    <body>
+    <a href="/books">Вернуться на главную</a>
+        <div class="container">
+            <h1 class="text-center" th:text="${appName}">Default app name</h1>
+            <div>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Выйти"/>
+                </form>
+            </div>
+            <a href="/book/new">Добавить книгу</a>
+            <h5>Поиск по жанрам</h5>
+            <form method="post" action="filterByGenres">
+                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                <input type="text" name="filterByGenres"/>
+                <button type="submit">Найти</button>
+            </form>
+            <hr/>
+            <div class="content">
+                <div class="row book" th:each="book : ${books}" >
+                    <div class="col-md-10 col-md-offset-1" th:id="${book.id}">
+                        <h3 th:text='${book.title}'>Статья</h3>
+                        <a th:href='${"/book/"+book.id}'>О книге</a>
+                        <br/>
+                        <a th:href='${"/book/"+book.id+"/delete"}'>Удалить книгу</a>
+                        <hr/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

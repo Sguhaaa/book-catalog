@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Book Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+    <body>
+    <a href="/books">Вернуться на главную</a>
+        <div class="container">
+            <h1 class="text-center" th:text="${appName}">Default app name</h1>
+            <a class="reserv" th:href='${"/book/"+ id +"/history/new"}'>Изменить статус брони</a>
+            <hr/>
+            <div class="content">
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Статус</th>
+                        <th scope="col">Дата</th>
+                        <th scope="col">Пользователь</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  th:each="res : ${reservations}" >
+                        <td th:switch="${res.reserved}" class="col-md-10 col-md-offset-1" th:id="${res.id}" th:attr="data-post-id=${res.reserved}">
+                            <p th:case=true th:text='Забронирована'>Статья</p>
+                            <p th:case=false th:text='Возвращена'>Статья</p>
+                            <p th:case="*" th:text='проблема'>Статья</p>
+                        </td>
+                        <td th:text="${res.date}"></td>
+                        <td th:text="${res.user}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

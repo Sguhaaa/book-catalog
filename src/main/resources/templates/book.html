@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>TODO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<a href="/books">Вернуться на главную</a>
+<div class="container">
+    <h1 th:text="${book.author + ' - ' +book.title}">Книга</h1>
+    <a th:href='${"/book/"+book.id+"/edit"}'>Изменить данные</a>
+    <h3>Жанры</h3>
+    <ul class="list-group" th:each="genre : ${book.genres}" >
+        <li th:text='${genre.name}'>жанр</li>
+    </ul>
+    <hr/>
+    <h3>Информация</h3>
+    <div class="content" th:text="${book.content}">Содержание книги</div>
+    <hr/>
+    <a th:href='${"/book/"+book.id+"/history"}'>История бронирования</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Аутентификация</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="col-md-10 col-md-offset-1">
+<h3>Войдите в систему</h3>
+<div th:if="${param.error}">
+    Неверный логин или пароль. Вы зарегистрированы?
+</div>
+<div th:if="${param.logout}">
+    Вы вышли из системы.
+</div>
+        <form th:action="@{/login}" method="post">
+            <div><label> Логин: <input type="text" name="username"/> </label></div>
+            <div><label> Пароль: <input type="password" name="password"/> </label></div>
+            <div><input type="submit" value="Войти"/></div>
+        </form>
+<a href="/registration">Регистрация</a>
+</div>
+</body>
+</html>
